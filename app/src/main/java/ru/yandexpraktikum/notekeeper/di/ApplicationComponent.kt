@@ -1,0 +1,23 @@
+package ru.yandexpraktikum.notekeeper.di
+
+import android.app.Application
+import dagger.BindsInstance
+import dagger.Component
+import ru.yandexpraktikum.add_note.di.AddNoteSubcomponent
+import ru.yandexpraktikum.all_notes.di.AllNotesSubcomponent
+import ru.yandexpraktikum.core.di.CoreModule
+import javax.inject.Singleton
+
+@Singleton
+@Component(modules = [CoreModule::class])
+interface ApplicationComponent {
+
+    fun getAddNoteSubcomponent(): AddNoteSubcomponent.Factory
+    fun getAllNotesSubcomponent(): AllNotesSubcomponent.Factory
+
+    @Component.Factory
+    interface AppComponentFactory {
+        fun create(@BindsInstance application: Application
+        ): ApplicationComponent
+    }
+}
