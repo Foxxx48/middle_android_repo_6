@@ -8,9 +8,6 @@ import ru.yandexpraktikum.core.domain.model.Note
 import ru.yandexpraktikum.core.domain.repository.NotesRepository
 import javax.inject.Inject
 
-/**
- * TODO("Add documentation")
- */
 class NotesRepositoryImpl  @Inject constructor(
     private val noteDao: NoteDao,
     private val noteMapper: DataNoteMapper

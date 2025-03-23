@@ -9,15 +9,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
+import dagger.hilt.android.AndroidEntryPoint
 import ru.yandexpraktikum.notekeeper.presentation.navigation.NoteKeeperNavHost
 import ru.yandexpraktikum.core_ui.presentation.theme.NoteKeeperTheme
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val appComponent by lazy {
-        (application as NoteKeeperApp).appComponent
-
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -29,7 +27,6 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val navController = rememberNavController()
                     NoteKeeperNavHost(
-                        appComponent = appComponent,
                         navController = navController
                     )
                 }

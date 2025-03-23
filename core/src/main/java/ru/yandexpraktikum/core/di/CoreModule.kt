@@ -1,11 +1,13 @@
 package ru.yandexpraktikum.core.di
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import ru.yandexpraktikum.core.data.db.NoteDao
 import ru.yandexpraktikum.core.data.db.NoteDatabase
 import ru.yandexpraktikum.core.data.repository.NotesRepositoryImpl
@@ -13,6 +15,7 @@ import ru.yandexpraktikum.core.domain.repository.NotesRepository
 import javax.inject.Singleton
 
 @Module
+@InstallIn(SingletonComponent::class)
 interface CoreModule {
 
     @Binds
@@ -24,11 +27,9 @@ interface CoreModule {
 
         @Provides
         @Singleton
-//        fun providesNoteDatabase(context: Context): NoteDatabase {
-        fun providesNoteDatabase(application: Application): NoteDatabase {
+        fun providesNoteDatabase(@ApplicationContext context: Context): NoteDatabase {
             return Room.databaseBuilder(
-//                context.applicationContext,
-                application,
+                context.applicationContext,
                 NoteDatabase::class.java,
                 DATABASE_NAME
             ).build()
